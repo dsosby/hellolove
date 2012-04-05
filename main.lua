@@ -1,6 +1,13 @@
 function love.load()
     x = 100
     y = 100
+
+    keybindings = {
+        left  = function() x = x - 10 end,
+        right = function() x = x + 10 end,
+        up    = function() y = y - 10 end,
+        down  = function() y = y + 10 end
+    }
 end
 
 function love.draw()
@@ -8,16 +15,7 @@ function love.draw()
 end
 
 function love.update(dt)
-    if love.keyboard.isDown("left") then
-        x = x - 10
-    end
-    if love.keyboard.isDown("right") then
-        x = x + 10
-    end
-    if love.keyboard.isDown("up") then
-        y = y - 10
-    end
-    if love.keyboard.isDown("down") then
-        y = y + 10
+    for key,fn in pairs(keybindings) do
+        if love.keyboard.isDown(key) then fn() end
     end
 end
